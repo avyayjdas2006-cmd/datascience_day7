@@ -1,31 +1,61 @@
-# Mall Customer Segmentation via K-Means
+# Customer Segmentation using K-Means Clustering
 
 Name: Avyay J Das
 MUID: avyayjdas@mulearn
 
-# What this project does
-This project applies unsupervised machine learning to group mall retail customers into distinct segments based on their age, gender, annual income, and spending scores. The goal is to identify actionable target audiences for marketing teams.
+---
 
-# My Approach
-1. **Data Prep:** Loaded the customer data (200 rows, no missing values), handled the categorical `Gender` column by mapping it to binary values (0 = Male, 1 = Female), and dropped the arbitrary `CustomerID` column.
-2. **Feature Scaling:** Applied `StandardScaler` because K-Means relies completely on Euclidean distance math, meaning columns with large ranges (like income) would completely drown out smaller metrics (like age or the binary gender flag).
-3. **Finding K:** Used the Elbow Method to plot the within-cluster sum of squares (WCSS) for K = 1 to 10. The rate of decrease slows down noticeably around **K = 5**, so 5 clusters was chosen (matching the assignment's target segment count).
-4. **Dimension Reduction:** Since humans can't visualize 4D data, I used Principal Component Analysis (PCA) to compress the dataset into 2 dimensions. This captured **54.80%** of the total variance, letting us see the clusters on a scatter plot. A supplementary raw Annual Income vs Spending Score plot is also included since those two features separate the segments most visibly.
+# Project Summary
 
-# The 5 Customer Segments Identified
-Gender turned out to be a strong natural separator once Age and Income were factored in — three of the five clusters ended up single-gender:
+This project applies the K-Means clustering algorithm to segment supermarket customers based on their demographic and spending behavior. Customer segmentation helps identify groups with similar characteristics, enabling businesses to design targeted marketing strategies, improve customer satisfaction, and increase revenue.
 
-* **Cluster 0 (Young High Spenders):** Mostly female (73%), younger crowd (avg age 27), mid income (~$63k) but very high spending score (~79). 37 customers.
-* **Cluster 1 (Middle-Aged Moderate Women):** 100% female, avg age 55, mid income (~$48k), moderate spending score (~44). 42 customers.
-* **Cluster 2 (Older Affluent Active Men):** 100% male, avg age 57, high income (~$74k), solid spending score (~61). 46 customers.
-* **Cluster 3 (High-Earning Cautious Men):** 100% male, younger-middle age (avg 34), high income (~$94k) but very low spending score (~28). 44 customers.
-* **Cluster 4 (High-Earning Reserved Women):** 100% female, avg age 47, the highest income of any segment (~$114k), but low-moderate spending score (~37). 31 customers.
+---
 
-# Business Strategies
-* **Retain Cluster 0 (Young High Spenders):** Already highly engaged — keep them with loyalty programs, trend-driven collections, and early access to new drops.
-* **Grow Cluster 1 (Middle-Aged Moderate Women):** Increase wallet share with targeted bundle offers and seasonal promotions matched to mid-range budgets.
-* **Maintain Cluster 2 (Older Affluent Active Men):** A dependable revenue base — sustain the relationship with premium loyalty perks and personalized service.
-* **Prioritize Cluster 3 & 4 (High-Earning, Low-Spending):** These two segments have the money but aren't spending it. This is the biggest untapped opportunity — target them with premium/exclusive product positioning, high-touch personal shopping, or invite-only VIP events to convert income into spend.
+# Approach
 
-# Conclusions
-The combination of Age, Gender, Income, and Spending Score reveals more nuanced segments than income and spending alone would — in particular, it surfaces that spending behavior at similar income levels diverges sharply by gender and age. The clearest business opportunity lies in the two high-income, low-spending clusters (3 and 4), which together represent 75 of the 200 customers (37.5%) and are prime candidates for targeted premium marketing.
+The following steps were performed to complete the project:
+
+- Loaded and explored the customer dataset.
+- Removed the `CustomerID` column as it does not contribute to clustering.
+- Encoded the `Gender` feature into numerical values.
+- Checked for missing values and outliers.
+- Applied **StandardScaler** to normalize all features.
+- Used the **Elbow Method** to determine the optimal number of clusters.
+- Trained a **K-Means** clustering model with **5 clusters**.
+- Assigned each customer to a cluster.
+- Profiled each cluster based on the average feature values and assigned meaningful business names.
+- Applied **Principal Component Analysis (PCA)** to reduce the data to two dimensions for visualization.
+- Visualized the customer segments and analyzed the resulting clusters.
+
+---
+
+# Important Observations and Findings
+
+- No missing values were found in the dataset.
+- A single outlier was observed in the Annual Income feature, but it was retained as it represents a valid customer.
+- Feature scaling was performed since K-Means is distance-based and requires features to be on a similar scale.
+- The Elbow Method indicated that **5** is the optimal number of clusters.
+- PCA reduced the dataset to two principal components, explaining **59.92%** of the total variance.
+- The clustering process identified five distinct customer segments with different income and spending patterns.
+
+---
+
+# Final Conclusions and Business Insights
+
+The K-Means model successfully segmented customers into five meaningful groups, allowing the supermarket to better understand customer behavior.
+
+### Customer Segments
+
+- **HIGH-VALUE CUSTOMERS** – High-income customers with relatively high spending.
+- **HIGH-INCOME LOW SPENDERS** – Customers with high income but low spending potential.
+- **YOUNG HIGH SPENDERS** – Young customers who spend frequently despite moderate income.
+- **BUDGET SHOPPERS** – Young customers with lower income and moderate spending.
+- **SENIOR MODERATE SPENDERS** – Older customers with moderate income and spending.
+
+### Business Insights
+
+- Reward **HIGH-VALUE CUSTOMERS** with loyalty programs and exclusive benefits.
+- Encourage **HIGH-INCOME LOW SPENDERS** through personalized promotions and premium product recommendations.
+- Retain **YOUNG HIGH SPENDERS** with targeted marketing campaigns and special offers.
+- Provide discounts and value-for-money deals for **BUDGET SHOPPERS**.
+- Offer personalized services and loyalty incentives to **SENIOR MODERATE SPENDERS** to improve customer retention.
